@@ -1,0 +1,79 @@
+/*Header/menu styling*/
+html {
+  background-color: #26262b;
+}
+header {
+  height: 125vh;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  color: #3495ec;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 40px;
+}
+
+/*Login area styling*/
+.loginArea {
+  border-style: solid;
+  border-color: #3495ec;
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 2px;
+  padding: 5px;
+  line-height: 30px;
+}
+
+
+
+
+/*Planner styling*/
+.PlannerContainer {
+  /*to make sure header is fixed and that planner follows header*/
+  position: fixed;
+  width: 100vw;
+  margin-top: 12.5vh;
+}
+#TaskInputBtn {
+  display: flex;
+  justify-content: center; 
+}
+
+.newWeekBtn {
+  margin: 20px;
+}
+
+
+/*Week styling*/
+.WeekContainer {
+  margin: 25px;
+  display: flex;
+  justify-content: space-around;
+}
+
+/*Day styling*/
+.DayContainer {
+  border-style: double;
+  /*need to make this height/width dynamic*/
+  height: 32vh;
+  width: 12vw;
+}
+
+.DayContainer h3 {
+  text-align: center;
+}
+
+/*Task styling*/
+#TaskContainer {
+  background-color: white;
+  width: 90px;
+  height: 30px;
+  padding: 7px;
+  border-left: 6px solid #3495ec;
+  position: absolute;
+  cursor: move;
+}
+

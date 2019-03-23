@@ -1,0 +1,39 @@
+{
+  "name": "don'tknowyet",
+  "version": "1.0.0",
+  "description": "Either going to be a media (hackernews or pinterest) kind of newsletter or a trello planning clone",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "build": "webpack --mode=production",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch-ui": "webpack --config webpack.config.js --watch"
+  },
+  "author": "Tristan",
+  "license": "ISC",
+  "dependencies": {
+    "babel-loader": "^8.0.4",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mongoose": "^5.4.19",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
+    "react-redux": "^6.0.1",
+    "redux": "^4.0.1",
+    "styled-components": "^4.1.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/plugin-proposal-class-properties": "^7.4.0",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/preset-es2015": "^7.0.0-beta.53",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.5",
+    "css-loader": "^2.1.1",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.2.3"
+  },
+  "proxy": "http://localhost:5001/"
+}
