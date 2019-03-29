@@ -18,9 +18,20 @@ const tasks = (state = [], action) => {
   }
 }
 
+const setup = (state = 'not started', action) => {
+  switch (action.type) {
+    case 'SETUP_START':
+      return 'started'
+    case 'SETUP_FINISH':
+      return action 
+    default:
+      return state
+  }
+}
 const rootReducer = combineReducers({
   weeks,
-  tasks
+  tasks,
+  setup
 })
 
 export default rootReducer;

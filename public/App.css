@@ -3,38 +3,105 @@ html {
   background-color: #26262b;
 }
 header {
-  height: 125vh;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  color: #3495ec;
-  text-align: center;
-}
-
-header h1 {
-  font-size: 40px;
-}
-
-/*Login area styling*/
-.loginArea {
-  border-style: solid;
-  border-color: #3495ec;
+  height: 12vh;
+  line-height: 3.5vh;
   position: fixed;
   top: 0;
   left: 0;
-  margin: 2px;
-  padding: 5px;
-  line-height: 30px;
+  width: 100%;
+  color: #1fc5b1;
+  text-align: center;
+  border-bottom: 3px solid #1fc5b1;
+}
+
+header h1 {
+  font-size: 55px;
+  line-height: 3vh;
+}
+
+/***LOGIN PAGE***/
+.LoginPageContainer{
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  display:flex; 
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  width: 50vw;
+  margin: auto;
+  text-align: center;
+  background-color: #1fc5b1; 
+}
+
+/*******Home page setup*********/
+/*Login area styling*/
+.loginArea {
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin-right: 3.3vw;
+  height: 12vh;
+  display: flex;
+  align-items: center;
+}
+
+.loginArea div div span {
+  font-size: 27.5px;
+}
+
+.DropdownContainer {
+  z-index: 99;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 14vw;
+  text-align: left;
+  margin-top: 9vh;
+  margin-right: 4vw;
+  color: #1fc5b1;
+  font-size: 15px; 
+  background-color: white;
+}
+
+.DropdownContainer ul {
+  list-style-type: none;
+  line-height: 4.5vh;
+  padding-left: 1.75vw;
+}
+
+.DropdownContainer ul li:hover {
+  background-color: grey;
 }
 
 
+.startPlanner {
+  display: flex;
+  margin: 15vh auto 0px auto;
+}
+
+/*ProjectPlannerSetup styling*/
+.plannerSetup  {
+  text-align: center;
+  margin-top: 15vh;
+  color: #3495ec; 
+}
+.plannerSetup form {
+  line-height: 3.5vh;
+  margin: 0 auto;
+  width: 27.5vw;
+  border: 1.5px white solid;
+}
 
 
 /*Planner styling*/
 .PlannerContainer {
   /*to make sure header is fixed and that planner follows header*/
   position: fixed;
-  width: 100vw;
+  top: 0;
+  width: 100%;
   margin-top: 12.5vh;
 }
 #TaskInputBtn {

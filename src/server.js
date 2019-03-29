@@ -40,7 +40,20 @@ app.get('/', (req,res) => {
 
 app.post('/login', (req,res) => {
   console.log(req.body);
-  res.json({sucess: true})
+
+  let user = new User({
+    username: req.body.username,
+    password: req.body.password,
+    firstname: 'test1',
+    lastname: 'test1'
+  });
+
+  user.save(function (err, user) {
+    if (err) {
+      return console.error(err);
+    }
+  });
+  res.json({sucess: true, user: user})
  // res.send();
 })
 
@@ -60,20 +73,8 @@ const userSchema = new Schema({
 
 //compile into model
 let User = mongoose.model('User', userSchema);
-let testUser = new User({
-      username: 'test0',
-      password: 'test0',
-      firstname: 'test0',
-      lastname: 'test0'
-});
 
 //try save into database and find
-testUser.save(function (err, testUser) {
-  if (err) {
-    return console.error(err);
-  }
-  console.log(testUser.username);
-});
 
 //now how do i get front end to call a save with user input...?
 User.find(function (err, users) {
@@ -84,7 +85,7 @@ User.find(function (err, users) {
     console.log(element.username);
   })
 })
-*/
+
 
 //required
 app.listen(port, () => console.log(`Express server listening in on port ${port}!`));

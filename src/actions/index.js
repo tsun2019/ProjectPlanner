@@ -11,3 +11,21 @@ export const addTask = (task) => {
     task: task
   }
 }
+
+export const startSetup = () => {
+  return {
+    type: 'SETUP_START',
+    setup: 'started'
+  }
+}
+
+export const finishSetup = (name, authors, description, sprintLengths) => {
+  return {
+    type: 'SETUP_FINISH',
+    setup: 'finished',
+    name: name,
+    authors: authors,
+    description: description,
+    sprintLengths: sprintLengths
+  }
+}

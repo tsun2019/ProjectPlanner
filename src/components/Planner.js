@@ -13,7 +13,16 @@ class Planner extends Component {
       hideTask: true
     }
   }
-  
+ 
+  componentDidMount() { 
+    let i = 0;
+    //let sprintLength = Number(this.props.setup.sprintLengths);
+    while (i < 2) {
+      this.props.dispatch(addWeek())
+      i++;
+    }
+  }
+
 
   handleKeyPress = (e) => {
    if (e.key === 'Enter') {
@@ -29,11 +38,6 @@ class Planner extends Component {
     })
   }
 
-
-  addWeek = () => { 
-    this.props.dispatch(addWeek());
-  }
-  
   displayTaskActions = () => {
     if (this.state.hideTask === false){
       return <input onKeyPress = {this.handleKeyPress}/>
@@ -57,13 +61,9 @@ class Planner extends Component {
     })
   }
   
-
   render() {
     return(
       <div className = "PlannerContainer">
-        <button className = "newWeekBtn" onClick = {this.addWeek}>
-          New Week 
-        </button>
         <div>
           {this.displayWeeks()}
         </div>
@@ -79,9 +79,11 @@ class Planner extends Component {
 }
 
 function mapStateToProps(state) {
+  console.log(state);
   return {
     weeks: state.weeks,
-    tasks: state.tasks
+    tasks: state.tasks,
+    setup: state.setup
   }
 
 }
