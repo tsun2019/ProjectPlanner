@@ -1,20 +1,12 @@
 import React, { Component } from 'react';
-import RegisterPage from './RegisterPage';
-import App from './App';
-import ProjectPlannerSetup from './ProjectPlannerSetup';
+import LoginPage from './LoginPage';
 import { Switch, Route, Link, Redirect } from 'react-router-dom';
-import { startSetup, postUserInfo } from '../actions/index.js';
-import { login } from '../actions';
+import { login, postUserInfo } from '../actions/index.js';
 import { connect } from 'react-redux';
 
-class LoginPage extends Component {
+class RegisterPage extends Component {
   constructor(props) {
-    super(props)
-    /*
-    this.state = {
-      loggedIn: false
-    }
-    */
+    super(props);
   }
 
 
@@ -29,13 +21,13 @@ class LoginPage extends Component {
       password: e.target.value
     }) 
   }
-
-  handleLogin = (e) => {
+  
+  handleRegister = (e) => {
     e.preventDefault();
     e.target.value = "";
     const username = this.state.username;
-    const password = this.state.password;
-    fetch('/login', {
+    const password = this.state.password; 
+    fetch('/register', {
       method: 'POST',
       headers:{
         "Content-Type": "application/json"
@@ -45,11 +37,14 @@ class LoginPage extends Component {
     //sucess
     .then(response => response.json())
     .then(response => {
+      //probably reroute here to /setup
       if (response.success) {
-        console.log("successful login?");
-        this.props.dispatch(login());
-        this.props.dispatch(postUserInfo(response.username));
-      } else {
+        if (!this.props.loggedIn) {
+          this.props.dispatch(login());
+          this.props.dispatch(postUserInfo(response.username));
+        }
+      }
+      else {
         alert(response.msg);
       }
     })
@@ -58,53 +53,45 @@ class LoginPage extends Component {
     })
     e.target.value = "";
   }
-
-
   render() {
-    //const loggedIn = this.state.loggedIn;
     if (this.props.loggedIn) {
-     /* return (<Route path='/' render={() => {
-        <ProjectPlannerSetup/>
-      }}/>)*/
-      //redirect to /setup
-      console.log("Hi");
       return <Redirect to='/setup'/>
     }
-    else{
-      return(
-        //container to have surrond form and position it correclty
-      <div className="LoginPageContainer">
-        <div className="Login">
-          <h1>Login</h1>
-          <div className="LoginForm">
+    return(
+      <div className="RegisterPageContainer">
+        <div className="Register">
+          <h1>Sign Up Now!</h1>
+          <div className="RegisterForm">
             <form>
-              <div> 
+              <div>
                 <label for="username">Username: </label>
                 <input name="username" onChange={this.onUsernameChange}/>
               </div>
               <div>
                 <label for="password">Password: </label>
                 <input name="password" type="password" onChange={this.onPasswordChange}/>
+              </div> 
+              <div>
+                <label for="confirmPassword">Confirm Password: </label>
+                <input name="confirmPassword" type="password"/>
               </div>
-              <button onClick={this.handleLogin}>Login</button>
-            </form> 
+              <button onClick={this.handleRegister}>Sign Up</button>
+            </form>
           </div>
-          <div className="RegisterLink">
-            <p><Link to='/register'>If you don't have an account sign up here!</Link></p>
+          <div className="LoginLink">
+            <p><Link to='/'>If you already have an account, login here!</Link></p>
           </div>
         </div>
       </div>
-      )
-    }
+    )
   }
 }
 
 function mapStateToProps(state) {
   return {
-    setup: state.setup,
     loggedIn: state.loggedIn,
     userInfo: state.userInfo
   }
 }
 
-export default connect(mapStateToProps)(LoginPage);
+export default connect(mapStateToProps)(RegisterPage);

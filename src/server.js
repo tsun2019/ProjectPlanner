@@ -5,10 +5,26 @@ const express = require('express');
 const app = express();
 const port = 5001;
 
+//Add on
+const crypto = require('crypto');
+
+//For easier absolute pathing in Node
+const path = require('path');
+
+//routing
+const router = express.Router();
+//import controllers
+const startController = require('./controllers');
+const registerController = require('./controllers/register');
+const loginController = require('./controllers/login');
+const authController = require('./controllers/auth');
 //required for mongoose
 const mongoose = require('mongoose');
 //body-parser for parsing request
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: false
@@ -21,72 +37,40 @@ db.once('open', () => {
   console.log("connected!");
 });
 
-//Add ons
-//For easier absolute pathing in Node
-const path = require('path');
+//need cookie middleware
+app.use(cookieParser());
 
-//routing
-const router = express.Router();
+//set cookie
+//app.use(login);
 
 //tells where to locate static files html/css/js
 app.use(express.static(path.join(__dirname, '../public')));
 
+/*app.use(function(req, res) { 
+  let session = req.cookies.session;
+  if (!session) {
+    //redirect to login page by sending something to frontend and letting react handle
+    
+  }
+})
+*/
 //respond with index.html file with everything in it
-app.get('/', (req,res) => {
-  res.sendFile('index.html', {
-    root: path.join(__dirname, '../public')
-  });
-})
+app.get('/', startController);
 
-app.post('/login', (req,res) => {
-  console.log(req.body);
+//privaterouter
+app.get('/auth', authController);
 
-  let user = new User({
-    username: req.body.username,
-    password: req.body.password,
-    firstname: 'test1',
-    lastname: 'test1'
-  });
+//post user data to database.
+app.post('/register', registerController);
 
-  user.save(function (err, user) {
-    if (err) {
-      return console.error(err);
-    }
-  });
-  res.json({sucess: true, user: user})
- // res.send();
-})
+//post user data and compare to see if should login
+app.post('/login', loginController);
 
 //use router
+
 app.use(router);
 
-//set up mongo schema
-const Schema = mongoose.Schema;
-const ObjectId = Schema.ObjectId;
-
-const userSchema = new Schema({
-  username: String,
-  password: String,
-  firstName: String,
-  lastName: String
-});
-
-//compile into model
-let User = mongoose.model('User', userSchema);
-
-//try save into database and find
-
-//now how do i get front end to call a save with user input...?
-User.find(function (err, users) {
-  if (err) {
-    return console.error(err);
-  }
-  users.map((element) => {
-    console.log(element.username);
-  })
-})
 
 
 //required
-app.listen(port, () => console.log(`Express server listening in on port ${port}!`));
-
+app.listen(port, () => console.log(`Express server listening in on port ${port}!`))

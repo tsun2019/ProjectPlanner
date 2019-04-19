@@ -22,18 +22,73 @@ header h1 {
 /***LOGIN PAGE***/
 .LoginPageContainer{
   position: fixed;
-  right: 0;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  display:flex; 
+  height: 100%;
+  width: 100%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Login {
+  text-align: center;
+  background-color: #1fc5b1;
+  height: 50vh;
+  width: 50vw;
+}
+
+.Login h1 {
+  position: absolute;
+  width: 50vw;
+}
+
+.LoginForm {
+  display: flex;
   justify-content: center;
   align-items: center;
   height: 50vh;
-  width: 50vw;
-  margin: auto;
+  line-height: 5vh;
+}
+
+.LoginLink {
+  position: relative;
+  bottom: 6vh;
+}
+
+/***REGISTER LINK AND THEN PAGE**/
+.RegisterLink {
+  position: relative;
+  bottom: 6vh;
+}
+
+
+.RegisterPageContainer{
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.Register {
   text-align: center;
-  background-color: #1fc5b1; 
+  background-color: #1fc5b1;
+  height: 50vh;
+  width: 50vw;
+}
+
+.Register h1 {
+  position: absolute;
+  width: 50vw;
+}
+
+.RegisterForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  line-height: 5vh;
 }
 
 /*******Home page setup*********/
@@ -52,15 +107,23 @@ header h1 {
   font-size: 27.5px;
 }
 
+.menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  line-height: 12vh;
+  margin-right: 10vw;
+  font-size: 27px;
+}
+
 .DropdownContainer {
-  z-index: 99;
   position: fixed;
   top: 0;
   right: 0;
   width: 14vw;
   text-align: left;
   margin-top: 9vh;
-  margin-right: 4vw;
+  margin-right: 10vw;
   color: #1fc5b1;
   font-size: 15px; 
   background-color: white;
@@ -69,17 +132,20 @@ header h1 {
 .DropdownContainer ul {
   list-style-type: none;
   line-height: 4.5vh;
-  padding-left: 1.75vw;
+  padding-left: 0vw;
 }
 
 .DropdownContainer ul li:hover {
   background-color: grey;
 }
 
+.startPlannerMargin {
+  margin-top: 15vh;
+}
 
 .startPlanner {
   display: flex;
-  margin: 15vh auto 0px auto;
+  justify-content: center;
 }
 
 /*ProjectPlannerSetup styling*/
@@ -95,6 +161,22 @@ header h1 {
   border: 1.5px white solid;
 }
 
+/*PlannerOverview styling*/
+
+.plannerOverview0 {
+  background-color: slategray;
+  width: 60vw;
+  margin: 15vh auto 0;
+  text-align: center;
+
+}
+.plannerOverview {
+  background-color: slategray;
+  width: 60vw;
+  margin: 0 auto;
+  text-align: center;
+
+}
 
 /*Planner styling*/
 .PlannerContainer {

@@ -14,6 +14,9 @@ class Planner extends Component {
     }
   }
  
+
+  /*Might want to set up routes here so I can create routes with arbitrary X
+   * such as planner/X that route to specific planner*/
   componentDidMount() { 
     let i = 0;
     //let sprintLength = Number(this.props.setup.sprintLengths);

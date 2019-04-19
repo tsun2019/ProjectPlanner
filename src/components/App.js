@@ -1,63 +1,49 @@
 import React, { Component } from 'react';
-import Planner from './Planner.js';
+import Planner from './Planner';
 import ProjectPlannerSetup from './ProjectPlannerSetup.js'
-import Login from './Login.js';
-import LoginPage from './LoginPage.js';
+import PlannerOverview from './PlannerOverview';
+import LoginPage from './LoginPage';
+import RegisterPage from './RegisterPage';
+import Dropdown from './Dropdown';
+import PrivateRoute from '../PrivateRoute';
 import { createStore } from 'redux';
-import { Provider } from 'react-redux';
-import { connect } from 'react-redux';
-import { startSetup } from '../actions/index.js';
-import rootReducer from '../reducers/index.js';
+import { Provider, connect } from 'react-redux';
+import { startSetup } from '../actions';
+import rootReducer from '../reducers';
+import { createBrowserHistory } from 'history';
+import { Switch, Route, Link, Redirect } from 'react-router-dom';
 
-const store = createStore(rootReducer);
+//const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
 class App extends Component {
-  constructor(props) {
-    super(props)
-  }
-
-  displaySetup = () => {
-    this.props.dispatch(startSetup());
-  }
-
-  display = () => {
-    if (this.props.setup === 'not started') {
-      return (
-              <button className="startPlanner" onClick={this.displaySetup}>
-                Start Planner Setup
-              </button>
-      )
-    }
-    else if (this.props.setup === 'started') { 
-      return <ProjectPlannerSetup/> 
-    }
-    else{
-      return <Planner/>
-    }
-  }
 
   render() {
     return(
-      <LoginPage/>
-      //<div>
-      //  <header>
-      //    {this.props.setup.setup == "finished"
-      //      ? <h1>{this.props.setup.name}</h1>
-      //      : <h1>Project Planner</h1>}
-      //    <Login/>
-      //  </header>
-      //  {this.display()}
-      //</div>
+      <div>
+        <header>
+          <h1>Project Planner</h1>
+          {this.props.loggedIn 
+            ? <Dropdown username={this.props.userInfo}/>
+            : null}
+        </header>
+        <Switch>
+          <Route exact path='/' component={LoginPage}/>
+          <PrivateRoute exact path='/setup' component={ProjectPlannerSetup}/>
+          <PrivateRoute exact path='/planners' component={PlannerOverview}/>
+          <Route exact path='/register' component={RegisterPage}/>
+        </Switch>
+      </div>
     );
   }
 }
 
 function mapStateToProps(state) {
-  console.log(state);
   return {
-    setup: state.setup
+    setup: state.setup,
+    loggedIn: state.loggedIn,
+    userInfo: state.userInfo
   }
 }
 
-export default connect (mapStateToProps)(App);
+export default connect(mapStateToProps)(App);
 
