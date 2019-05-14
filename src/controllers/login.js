@@ -13,19 +13,6 @@ const login = (req, res) => {
       return console.error(err); 
     }
     if (user) {
-      //check if session id is stored 
-      //Session.findOne({sessionId: cookieSession}, function(err, session) {
-      //  if (err) {
-      //    return console.error(err);
-      //  }
-      //  if (session) {
-      //    //login
-      //    //this would let you sign in with a wrong password 
-      //    //if you have the cookie. so i think instead of testing
-      //    //here in login, we just test it for every request?
-      //    console.log("succesful login, used existing session.");
-      //    res.json({success: true, username: user.username});
-      //  } 
       if (user.password === req.body.password) {
         const uniqueKey = generate_key();  
         res.cookie('session', uniqueKey, {httpOnly: true});

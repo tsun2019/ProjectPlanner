@@ -6,14 +6,10 @@ import LoginPage from './LoginPage';
 import RegisterPage from './RegisterPage';
 import Dropdown from './Dropdown';
 import PrivateRoute from '../PrivateRoute';
-import { createStore } from 'redux';
-import { Provider, connect } from 'react-redux';
+import { connect } from 'react-redux';
 import { startSetup } from '../actions';
 import rootReducer from '../reducers';
-import { createBrowserHistory } from 'history';
 import { Switch, Route, Link, Redirect } from 'react-router-dom';
-
-//const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
 class App extends Component {
 
@@ -30,6 +26,7 @@ class App extends Component {
           <Route exact path='/' component={LoginPage}/>
           <PrivateRoute exact path='/setup' component={ProjectPlannerSetup}/>
           <PrivateRoute exact path='/planners' component={PlannerOverview}/>
+          <PrivateRoute path='/planners/:id' component={Planner}/>
           <Route exact path='/register' component={RegisterPage}/>
         </Switch>
       </div>

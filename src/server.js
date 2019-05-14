@@ -17,6 +17,7 @@ const router = express.Router();
 const startController = require('./controllers');
 const registerController = require('./controllers/register');
 const loginController = require('./controllers/login');
+const logoutController = require('./controllers/logout');
 const authController = require('./controllers/auth');
 //required for mongoose
 const mongoose = require('mongoose');
@@ -46,14 +47,6 @@ app.use(cookieParser());
 //tells where to locate static files html/css/js
 app.use(express.static(path.join(__dirname, '../public')));
 
-/*app.use(function(req, res) { 
-  let session = req.cookies.session;
-  if (!session) {
-    //redirect to login page by sending something to frontend and letting react handle
-    
-  }
-})
-*/
 //respond with index.html file with everything in it
 app.get('/', startController);
 
@@ -65,6 +58,9 @@ app.post('/register', registerController);
 
 //post user data and compare to see if should login
 app.post('/login', loginController);
+
+//post/delete sessionId
+app.post('/logout', logoutController);
 
 //use router
 

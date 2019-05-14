@@ -13,7 +13,7 @@ class PlannerOverview extends Component {
           if (index === 0) { 
             return(
               <div className="plannerOverview0">
-                <Link to={`/planner${index + 1}`}><h3>{planner.name}</h3></Link>
+                <Link to={`/planners/${index + 1}`}><h3>{planner.name}</h3></Link>
                 <p>By: {planner.authors}</p>
                 <p>{planner.description}</p>
               </div>

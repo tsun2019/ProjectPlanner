@@ -8,7 +8,6 @@ class Task extends Component {
    dragElement(element) {
     let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
     element.onmousedown = dragMouseDown;
-
     function dragMouseDown(e) {
       e = e || window.event;
       e.preventDefault();
@@ -17,7 +16,6 @@ class Task extends Component {
       document.onmouseup = closeDragElement;
       document.onmousemove = elementDrag;
     }
-
     function elementDrag(e) {
       e = e || window.event;
       e.preventDefault();
@@ -28,25 +26,21 @@ class Task extends Component {
       element.style.top = (element.offsetTop - pos2) + "px";
       element.style.left = (element.offsetLeft - pos1) + "px";
     }
-
     function closeDragElement() {
       document.onmouseup = null;
       document.onmousemove = null;
     }
   }
-
-
   componentDidMount() {
     this.dragElement(document.getElementById("TaskContainer"))
   }
-
   componentDidUpdate() {
     this.dragElement(document.getElementById("TaskContainer"))
   }
 */
   render() {
     return(
-      <div className id= "TaskContainer">{this.props.desc}</div>
+      <div className= "TaskContainer">{this.props.desc}</div>
     
     )
   

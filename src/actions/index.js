@@ -54,6 +54,13 @@ const authStart = () => {
  }    
 }
 
+const authComplete = (response) => {
+  return {
+    type: "AUTH_COMPLETE",
+    loggedIn: response.loggedIn
+  }
+}
+
 export const auth = () => {
   return (dispatch) => {
     dispatch(authStart())
@@ -63,13 +70,29 @@ export const auth = () => {
         "Content-Type": "application/json"
       }
     })
+    .then(response => response.json())
     .then(response => {
-//      dispatch(authStart())
-      response.json()
+      dispatch(authComplete(response))
+      console.log("Response: ", response)
     })
+  }
+}
+
+export const logout = () => {
+  return (dispatch) => {
+    dispatch(authStart())
+    fetch('/logout', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+    })
+    .then(response => response.json())
     .then(response => {
-      console.log(response)
+      dispatch(authComplete(response));
+      console.log("ResponseLogOut: ", response)
     })
+    //catch here
   }
 }
 

@@ -44,15 +44,21 @@ const loggedIn = (state = false, action) => {
   switch(action.type) {
     case 'LOGIN':
       return true
+    case 'AUTH_COMPLETE':
+      return action.loggedIn
+    case 'LOGOUT':
+      return false
     default:
       return state
   }
 }
 
-const authCheck = (state = false, action) => {
+const authLoading = (state = false, action) => {
   switch(action.type) {
     case 'AUTH_START':
       return true
+    case "AUTH_COMPLETE":
+      return false
     default:
       return state
   }
@@ -74,7 +80,7 @@ const rootReducer = combineReducers({
   loggedIn,
   userInfo,
   overview,
-  authCheck
+  authLoading
 })
 
 export default rootReducer;

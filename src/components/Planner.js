@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Week from './Week.js';
-import Task from './Task.js';
 import Draggable from './Draggable.js';
 import { addWeek } from '../actions/index.js';
 import { addTask } from '../actions/index.js';
@@ -14,9 +13,6 @@ class Planner extends Component {
     }
   }
  
-
-  /*Might want to set up routes here so I can create routes with arbitrary X
-   * such as planner/X that route to specific planner*/
   componentDidMount() { 
     let i = 0;
     //let sprintLength = Number(this.props.setup.sprintLengths);
@@ -60,7 +56,9 @@ class Planner extends Component {
 
   displayTasks = () => {
     return this.props.tasks.map((task) => {
-      return <Draggable desc = {task}/>
+      //make this draggable task, bc i am just adding task strings
+      //to redux so this is safe.
+      return <Draggable className="TaskContainer" desc = {task}/>
     })
   }
   

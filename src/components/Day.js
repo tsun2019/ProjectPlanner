@@ -7,7 +7,7 @@ class Day extends Component {
       test: 'TestDayComponent',
     }
   }
-
+  
   render() {
     return(
       <div className = "DayContainer">

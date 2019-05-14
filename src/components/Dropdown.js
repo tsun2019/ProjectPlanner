@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { logout } from '../actions';
 
 class Dropdown extends Component {
   constructor(props){
@@ -21,8 +23,11 @@ class Dropdown extends Component {
     })
   }
  
+  logout = () => {
+    this.props.dispatch(logout());
+  }
   displayDropdown = () => {
-    let menu = ['Your Planners', 'New Planner', 'Drawing Board', 'Sign out'];
+    let menu = ['Your Planners', 'New Planner', 'Drawing Board', 'Log out'];
     if (this.state.dropdown) {
       return (
         <div className="DropdownContainer">
@@ -43,6 +48,7 @@ class Dropdown extends Component {
                 //bc then server should constantly check and if its not there
                 // reroute to login page
                 // BUT i want to say you ahve sucessfully logged out first.
+                return <li><Link onClick={this.logout}>{item}</Link></li>
               }
               else {
                 return <li key={i}><Link to='/planners'>{item}</Link></li>
@@ -71,4 +77,9 @@ class Dropdown extends Component {
   }
 }
 
-export default Dropdown;
+function mapStateToProps(state) {
+  return {
+    loggedIn: state.loggedIn
+  }
+}
+export default connect(mapStateToProps)(Dropdown);
